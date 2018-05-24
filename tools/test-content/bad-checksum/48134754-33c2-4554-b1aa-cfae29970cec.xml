@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Directory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/UniversalContentLibrarySpecification/v1">
+  <Name>Session Folder</Name>
+  <id>48134754-33c2-4554-b1aa-cfae29970cec</id>
+  <CreationDate>2018-05-02T10:38:06.7392149-07:00</CreationDate>
+  <Sessions>
+    <Session>a003e5b5-a63f-4939-a4cf-55d8674c242b\ucs.xml</Session>
+  </Sessions>
+</Directory>

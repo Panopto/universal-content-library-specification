@@ -1,0 +1,1 @@
+This sample demonstrates a library with one top level folder that has one session that has both a primary video, a secondary video, and a PPT presentation. 

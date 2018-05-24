@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Session xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/UniversalCaptureSpecification/v1">
+  <Title>A PPT only session</Title>
+  <Description>This session is valid but incomplete because it does not yet have a video</Description>
+  <Date>2015-01-15T00:00:00.000-00:00</Date>
+  <Videos/>
+  <Presentations>
+    <Presentation>
+      <Start>PT0S</Start>
+      <File Checksum="6ebfe3dc">test.pptx</File>
+      <SlideChanges>
+        <SlideChange>
+          <Title>Title slide</Title>
+          <Description/>
+          <Url/>
+          <Time>PT0S</Time>
+          <SlideNumber>1</SlideNumber>
+        </SlideChange>
+        <SlideChange>
+          <Title>Second slide</Title>
+          <Description/>
+          <Url/>
+          <Time>PT15S</Time>
+          <SlideNumber>2</SlideNumber>
+        </SlideChange>
+      </SlideChanges>
+    </Presentation>
+  </Presentations>
+  <Cuts/>
+</Session>

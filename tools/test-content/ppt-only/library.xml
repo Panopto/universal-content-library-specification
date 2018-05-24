@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Library xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/UniversalContentLibrarySpecification/v1">
+  <Name>UCLS/UCS Sample</Name>
+  <UniqueIdentifier>e2d1e6af-8173-4fa4-bd99-03841b1ef6f2</UniqueIdentifier>
+  <CreationDate>2018-05-02T10:38:06.8042148-07:00</CreationDate>
+  <RootDirectories>
+    <RootDirectory>352a7bba-471c-4973-9558-acc77a09ca2a.xml</RootDirectory>
+  </RootDirectories>
+</Library>

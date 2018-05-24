@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Directory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/UniversalContentLibrarySpecification/v1">
+  <Name>Top Level</Name>
+  <id>b5e6a8ce-9ad3-4d3f-a01a-a8d30168e272</id>
+  <CreationDate>2018-05-02T10:37:27.0617092-07:00</CreationDate>
+  <Subdirectories>
+    <Directory>second-level.xml</Directory>
+  </Subdirectories>
+</Directory>

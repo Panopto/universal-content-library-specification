@@ -1,0 +1,7 @@
+boto
+boto3
+lxml
+enum
+enum34
+pytest
+mock

@@ -1,0 +1,4 @@
+.idea
+*.pyc
+*.log
+.pytest_cache

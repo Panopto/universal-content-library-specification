@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+  targetNamespace="http://tempuri.org/UniversalContentLibrarySpecification/v1"
+  elementFormDefault="qualified"
+  xmlns:uclsns="http://tempuri.org/UniversalContentLibrarySpecification/v1"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  version="1.0">
+
+  <!-- Describes a collection of playable content on a single timeline. -->
+  <xs:element name="Directory">
+    <xs:complexType>
+      <xs:all>
+        <!-- The name of the directory. -->
+        <xs:element type="xs:string" name="Name"/>
+
+        <!-- Directory unique identifier. -->
+        <xs:element type="uclsns:Guid" name="id"/>
+
+        <!-- The date the directory was created. -->
+        <xs:element type="xs:dateTime" name="CreationDate"/>
+
+        <!-- Optional date of last modification -->
+        <xs:element type="xs:dateTime" name="LastModifiedDate" minOccurs="0"/>
+
+        <!-- A paragraph describing the directory contents in detail. -->
+        <xs:element type="xs:string" name="Description" minOccurs="0"/>
+
+        <xs:element name="Subdirectories" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="uclsns:File" name="Directory" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="Sessions" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="uclsns:File" name="Session" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <!-- An element tree meant for vender-specific extensions that may later be added to the general specification -->
+        <xs:element name="Extensions" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="uclsns:Extension" name="Extension" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- A definition for the globally unique identifier type uses. -->
+  <xs:simpleType name="Guid">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+        The representation of a GUID, generally the id of an element.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- A definition for a CRC attribute -->
+  <xs:simpleType name="CRC32">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-fA-F0-9]{8}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- A definition for a simple type that has a string path and a CRC attribute -->
+  <xs:complexType name="File">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            A CRC validation value to optionally detect and deal with random, non-malicious corruption
+          </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="Checksum" type="uclsns:CRC32" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <!-- Base type for all extensions. Simply defines an unique identifier -->
+  <xs:complexType name="Extension">
+    <xs:sequence>
+      <xs:element type="uclsns:Guid" name="ExtensionId"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
