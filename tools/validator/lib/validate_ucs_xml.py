@@ -30,29 +30,24 @@ def validate_files(args, xml_doc, rel_sub_dir, store, validate_checksum, log_fil
     for file_xpath in file_xpaths:
         instances = xml_doc.xpath(file_xpath, namespaces=lib.constants.UCSNS)
         for xfile in instances:
-            if xfile.get("Checksum") is not None:
-                file = store.get_local_path(
-                    store.combine(rel_sub_dir, xfile.text)
-                    )
-
-                if os.path.isfile(file):
-                    if validate_checksum:
-                        calc_checksum = lib.crc32.crc32(file)
-                        if int(xfile.get("Checksum"), 16) == calc_checksum:
-                            log_file.write(xfile.text + ' checksum is valid\n')
-                        else:
-                            log_file.write('Error: checksum '
-                                           + xfile.get("Checksum")
-                                           + ' does not match calculated value '
-                                           + hex(calc_checksum) + '\n')
-                            noErrors = False
-                else:
-                    log_file.write('Error: '
-                                   + xfile.text
-                                   + " doesn't exist\n")
-                    noErrors = False
+            file_path = store.combine(rel_sub_dir, xfile.text)
+            if store.file_exists(file_path):
+                if validate_checksum and xfile.get("Checksum") is not None:
+                    file = store.get_local_path(file_path)
+                    calc_checksum = lib.crc32.crc32(file)
+                    if int(xfile.get("Checksum"), 16) == calc_checksum:
+                        log_file.write(xfile.text + ' checksum is valid\n')
+                    else:
+                        log_file.write('Error: checksum '
+                                        + xfile.get("Checksum")
+                                        + ' does not match calculated value '
+                                        + hex(calc_checksum) + '\n')
+                        noErrors = False
             else:
-                log_file.write(xfile.text + ' has no checksum attribute\n')
+                log_file.write('Error: '
+                                + xfile.text
+                                + " doesn't exist\n")
+                noErrors = False
 
     return noErrors
 
