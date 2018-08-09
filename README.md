@@ -29,7 +29,7 @@ Everything looks good!
 
 The scrypt also supports validaing a library in AWS S3. The command line for that would look similar to the following:
 
-```$ Python -l <path to library xml file> -b <bucket> -a <your access key> -k <your secret key> -t s3 -o "output.log"```
+```$ Python validator.py -l <s3 key path to library xml file> -b <bucket> -a <your access key> -s <your secret key> -t s3 -o "output.log"```
 
 ## Schemas
 The schemas folder contain XSD files that constitute the UCLS and UCS specifications. They are described below.

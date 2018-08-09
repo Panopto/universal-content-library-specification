@@ -104,7 +104,7 @@ class S3Storage(IStorage):
             self.aws_secret_key,
             self.aws_region,
             self.bucket,
-            relpath
+            self.combine(self.libraryrootpath, relpath)
             )
 
 

@@ -42,7 +42,8 @@ def setup_storage_instance(args, log_file):
     # create scratch dir for downloads if s3
     if args.storage_type == StorageType.s3:
         log_file.write('Creating scratch dir ' + args.scratch_dir + '\n')
-        os.makedirs(args.scratch_dir)
+        if not os.path.isdir(args.scratch_dir):
+            os.makedirs(args.scratch_dir)
         log_file.write('Scratch dir ' + args.scratch_dir + ' created\n')
 
     return store
