@@ -6,7 +6,7 @@
   xmlns="http://tempuri.org/XMLSchema.xsd"
   xmlns:mstns="http://tempuri.org/XMLSchema.xsd"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  version="1.0">
+  version="2.0">
 
   <!-- Describes a collection of playable content on a single timeline. -->
   <xs:element name="Session">
