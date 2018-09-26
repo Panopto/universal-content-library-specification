@@ -32,7 +32,7 @@ def validate_xml(xmlfile, rel_xml_file, xsd_file, log_file):
         with open('error_syntax.log', 'a') as error_log_file:
             error_log_file.write(str(err.error_log) + '\n')
 
-    except Exception, e:
+    except Exception as e:
         log_file.write('Unknown error validating '
                        + rel_xml_file
                        + ': '
@@ -79,7 +79,7 @@ def validate_xml(xmlfile, rel_xml_file, xsd_file, log_file):
                        + str(e))
         raise
 
-    except Exception, e:
+    except Exception as e:
         log_file.write('Error validating ' + rel_xml_file + ': ' + str(e))
         raise
 

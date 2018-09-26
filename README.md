@@ -27,9 +27,25 @@ Performing validation...
 Everything looks good!
 ```
 
-The scrypt also supports validaing a library in AWS S3. The command line for that would look similar to the following:
+The script also supports validaing a library in AWS S3. The command line for that would look similar to the following:
 
 ```$ Python validator.py -l <s3 key path to library xml file> -b <bucket> -a <your access key> -s <your secret key> -t s3 -o "output.log"```
+
+Additionally, you can also use generate_ucls.py to generate UCLS/UCS xml files for a library of media files. All you have to do is give the full path to the root folder containing media files to crawl for. The command line would look something like the below:
+
+```
+$ cd <package folder>\tools\validator
+$ python generate_ucls.py -r <local drive folder> -l ucls_gen.log
+```
+
+It'll generate xml files in the folder you passed in with -r. To verify the generated xml files, you could then do the following:
+
+```
+$ cd <package folder>\tools\validator
+$ python validator.py -l <local drive folder>\library.xml -t unc -o "output.log"
+```
+
+**Note that generate_ucls.py requires an ffprobe executable to have been installed and be in your path.** See https://www.ffmpeg.org for how to get it installed. The ffprobe python package in theory could've been used in lieu of this, but as of this writing, it was found to be slow and sometimes would hang on certain files, so it's not recommended at this time.
 
 ## Schemas
 The schemas folder contain XSD files that constitute the UCLS and UCS specifications. They are described below.
@@ -54,7 +70,7 @@ If you plan on building tooling for UCLS library processing, you could auto-gene
 This will output a universal-capture-2.0.cs file you can use to serialize/deserialize a UCS xml file.
 
 #### Python
-lxml provides the necessary functionality to do this fairly easily. Please see the validator tool for an example of how to do this.
+lxml provides the necessary functionality to do this fairly easily. Please see the validator tool for an example of how to do this. Note that ucls_directory.py, ucls_library.py, and ucs_session.py were auto-generated from the schema XSDs using generateDS.py that you can get from https://pypi.org/project/generateDS. See those files for the command line used to generated them.
 
 ## UCLS Library Samples
 The package comes with sample UCLS libraries to provide examples of what UCLS and UCS xml files look like and how they're structured. Please see the samples folder

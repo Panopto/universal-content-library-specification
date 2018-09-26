@@ -66,7 +66,7 @@ def main():
         help='Full path to UCLS library xml in the root of the library store.')
     parser.add_argument(
         '-o',
-        '--log-oile',
+        '--log-file',
         dest='log_file',
         required=False,
         help='Filename of output log file. Based on current time if '
