@@ -27,7 +27,7 @@ Performing validation...
 Everything looks good!
 ```
 
-The script also supports validaing a library in AWS S3. The command line for that would look similar to the following:
+The script also supports validating a library in AWS S3. The command line for that would look similar to the following:
 
 ```$ Python validator.py -l <s3 key path to library xml file> -b <bucket> -a <your access key> -s <your secret key> -t s3 -o "output.log"```
 
