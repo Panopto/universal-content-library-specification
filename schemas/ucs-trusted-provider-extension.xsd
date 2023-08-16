@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+  targetNamespace="http://tempuri.org/UniversalCaptureSpecification/v1"
+  elementFormDefault="qualified"
+  xmlns:ucsns="http://tempuri.org/UniversalCaptureSpecification/v1"
+  xmlns="http://tempuri.org/XMLSchema.xsd"
+  xmlns:mstns="http://tempuri.org/XMLSchema.xsd"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  version="1.0">
+
+  <xs:element name="TrustedProvider" type="ucsns:TrustedProviderExtension"/>
+
+  <!--
+    The commented out types below are already defined in the UCS xsd, so you'll get xsd validation errors if
+    you use this file alongside UCS xsd to validate a UCS xml. Hence the reason they're commented out. They
+    were here only to enable autogen of .cs. If you need to re-autogen the .cs with xsd.exe, temporarily
+    uncomment these, then regenerate, then re-uncomment
+ -->
+<!--
+  <xs:simpleType name="Guid">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+        The representation of a GUID, generally the id of an element.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Extension">
+    <xs:sequence>
+      <xs:element type="ucsns:Guid" name="ExtensionId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="CRC32">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-fA-F0-9]{8}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="File">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            A CRC validation value to optionally detect and deal with random, non-malicious corruption
+          </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="Checksum" type="ucsns:CRC32" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType> 
+ -->
+ 
+  <xs:complexType name="TrustedProviderExtension">
+    <xs:complexContent>
+      <!--
+      ExtensionId for TrustedProviderExtension has been defined as 3d33d2b0-b1b9-4f1f-bc72-5d9aa797f251
+      and must be used when serializing an instance of it.
+      -->
+      <xs:extension base="ucsns:Extension">
+        <xs:sequence>
+          <!-- A collection of mappings between a video and the broadcast it's associated with -->
+          <xs:element name="BroadcastAssociations" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Video" minOccurs="0" maxOccurs="unbounded">
+                  <xs:complexType>
+                    <xs:all>
+                      <!-- The filename of the video. Must match exactly to a video filename in the same directory as this XML. -->
+                      <xs:element type="ucsns:File" name="File" minOccurs="1" maxOccurs="1"/>
+                      
+                      <!-- The broadcast identifier this video is associated with -->
+                      <xs:element type="xs:string" name="BroadcastIdentifier" minOccurs="1" maxOccurs="1"/>
+                    </xs:all>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+            
+          <!-- A collection of info about the recorder of this session -->
+          <xs:element name="RecorderInfo" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                  <!-- A unique identifier of the machine that recorded this session -->
+                  <xs:element type="xs:string" name="MachineUniqueIdentifier" minOccurs="1" maxOccurs="1"/>
+                
+                  <!-- ID of the recorder, as provided by the remote recorder API (if applicable) -->
+                  <xs:element type="xs:string" name="RemoteRecorderId" minOccurs="0" maxOccurs="1"/>
+                
+                  <!-- Version of the recorder (in the {vendor}.{product}.{major}.{minor}.{hotfix} format) -->
+                  <xs:element type="xs:string" name="RecorderVersion" minOccurs="1" maxOccurs="1"/>
+                      
+                  <!-- Build version string of the recorder -->
+                  <xs:element type="xs:string" name="RecorderBuild" minOccurs="1" maxOccurs="1"/>
+                
+                  <!-- Optional operating system verison information-->
+                  <xs:element type="xs:string" name="OSVersion" minOccurs="0" maxOccurs="1"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>
