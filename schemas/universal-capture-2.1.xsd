@@ -57,7 +57,10 @@
                     <!-- File Extension of the media file. -->
                     <xs:element type="xs:string" name="FileType" minOccurs="0"/>
 
-                    <!-- A collection of multi-bitrate versions of the video (typically lower than bitrate of canononical version). -->
+                    <!-- Optional:  Additional multi-bitrate versions of the video.  We expect only closed GOPs where
+                         GOP boundaries must be identical across video renditions.  The width and height may also be
+                         different, but the aspect ratio should remain constant across all renditions.
+                    -->
                     <xs:element name="Renditions" minOccurs="0">
                       <xs:complexType>
                         <xs:sequence>
