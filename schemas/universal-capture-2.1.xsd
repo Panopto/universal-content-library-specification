@@ -6,7 +6,7 @@
   xmlns="http://tempuri.org/XMLSchema.xsd"
   xmlns:mstns="http://tempuri.org/XMLSchema.xsd"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  version="2.0">
+  version="2.1">
 
   <!-- Describes a collection of playable content on a single timeline. -->
   <xs:element name="Session">
@@ -51,11 +51,36 @@
                     <!-- For convenience, not used by the server, a full path to the file on disk. -->
                     <xs:element type="xs:string" name="LocalFilename" minOccurs="0"/>
 
-                    <!-- Bit rate of the media file-->
+                    <!-- Bit rate of the canononical media file. -->
                     <xs:element type="xs:integer" name="Bitrate" minOccurs="0"/>
 
-                    <!-- File Extension of the media file -->
+                    <!-- File Extension of the media file. -->
                     <xs:element type="xs:string" name="FileType" minOccurs="0"/>
+
+                    <!-- Optional:  Additional multi-bitrate versions of the video.  We expect only closed GOPs where
+                         GOP boundaries must be identical across video renditions.  The width and height may also be
+                         different, but the aspect ratio should remain constant across all renditions.
+                    -->
+                    <xs:element name="Renditions" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Rendition" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:all>
+                                <!-- The filename of the video. Must match exactly to a video filename in the same directory as this XML. -->
+                                <xs:element type="ucsns:File" name="File"/>
+
+                                <!-- For convenience, not used by the server, a full path to the file on disk. -->
+                                <xs:element type="xs:string" name="LocalFilename" minOccurs="0"/>
+
+                                <!-- Bit rate of the media file. -->
+                                <xs:element type="xs:integer" name="Bitrate" minOccurs="0"/>
+                              </xs:all>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
 
                     <!-- A collection of ranges of video to omit from the final playable session. -->
                     <xs:element name="Cuts" minOccurs="0">
@@ -265,7 +290,7 @@
           </xs:complexType>
         </xs:element>
 
-        <!-- An element tree meant for vender-specific extensions that may later be added to the general specification -->
+        <!-- An element tree meant for vender-specific extensions that may later be added to the general specification. -->
         <xs:element name="Extensions" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
@@ -312,14 +337,14 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- A definition for a CRC attribute -->
+  <!-- A definition for a CRC attribute. -->
   <xs:simpleType name="CRC32">
     <xs:restriction base="xs:string">
       <xs:pattern value="[a-fA-F0-9]{8}"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <!-- A definition for a file that has a string path and a checksum (CRC) attribute -->
+  <!-- A definition for a file that has a string path and a checksum (CRC) attribute. -->
   <xs:complexType name="File">
     <xs:simpleContent>
       <xs:extension base="xs:string">
@@ -333,7 +358,7 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <!-- A definition for contact information for a person -->
+  <!-- A definition for contact information for a person. -->
   <xs:complexType name="Contact">
     <xs:sequence>
       <xs:element name="FirstName" type="xs:string" minOccurs="0"/>
@@ -342,7 +367,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <!-- Base type for all extensions. Simply defines an unique identifier -->
+  <!-- Base type for all extensions. Simply defines an unique identifier. -->
   <xs:complexType name="Extension">
     <xs:sequence>
       <xs:element type="ucsns:Guid" name="ExtensionId"/>
